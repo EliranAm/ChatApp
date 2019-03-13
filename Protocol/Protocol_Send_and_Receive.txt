@@ -1,0 +1,61 @@
+login example: 
+	outgoing - tag|*|*|userName|Password|*|*|*|*|
+	incoming - tag|responseType|communication message|userName|Password|admin|permitions|*|*|*|
+
+Login request:
+	outgoing - tag, user name, password
+	incoming - tag, responseType, communication message, user name, password, is admin, permition
+
+Log_off:	
+	outgoing - tag, user name, password, permition
+	incoming - tag, responseType, communication message
+
+Group_List:	
+	outgoing - tag, user name, permition
+	incoming - tag, responseType, communication message (list of the groups)
+
+Participated_Group:	
+	outgoing - tag, user name, permition
+	incoming - tag, responseType, communication message (list of the groups)
+
+JoinGroup:	
+	outgoing - tag, user name, communication message, permition
+	incoming - tag, responseType, communication message, group ip, group port
+
+UsersInGroup:	
+	outgoing - tag, communication message, permition
+	incoming - tag, responseType, communication message 
+
+LeaveGroup:	
+	outgoing - tag, user name, communication message, permition
+	incoming - tag, responseType, communication message
+	
+SaveToDataBase: /* --------NEW ----- */	
+	outgoing - tag, user name, permition
+	incoming - tag, responseType, communication message	
+	
+	
+
+***************************************************************
+
+Register	
+	outgoing - tag, user name, password, is admin, permition 
+	incoming - tag, responseType, communication message
+
+Unregister:	
+	outgoing - tag, user name
+	incoming - tag, responseType, communication message
+
+Close_Chat_Terminal:(server sent to clients)
+	outgoing - tag, communication message, group ip, group port
+	incoming - tag, responseType, communication message
+
+Create_Group:	
+	outgoing - tag, communication message (name of the group), permition(same permition as user pemition)
+	incoming - tag, responseType, communication message
+
+Close_Group:	
+	outgoing - tag, communication message(name of the group), permition
+	incoming - tag, responseType, communication message
+
+	
