@@ -1,7 +1,7 @@
 FLAGS = -pedantic -ansi -Werror -Wall
 
 ServerManagerApp: libServerManager.a ServerManagerUnitest.o ServerManager.c ../MultiServer/libServer.a ../UsersModule/libUsersModule.a ../Logs/libZlog4c.a ../HashMapReady/libHashMap.a ../../Protocol/libprotocol.a ../MultiServer/GenList/libList.a ../Multicast/libMulticast.a ../GroupsModule/libGroups.a ../Multicast/Queue/libQueue.a
-	gcc -g $(FLAGS) -o ServerManagerApp -L./ ServerManagerUnitest.o -lServerManager ../MultiServer/libServer.a ../UsersModule/libUsersModule.a ../Logs/libZlog4c.a ../HashMapReady/libHashMap.a ../Multicast/libMulticast.a ../../Protocol/libprotocol.a ../MultiServer/GenList/libList.a ../GroupsModule/libGroups.a ../Multicast/Queue/libQueue.a
+	gcc -g $(FLAGS) -o ServerManagerApp -L./ ServerManagerUnitest.o libServerManager.a ../MultiServer/libServer.a ../UsersModule/libUsersModule.a ../Logs/libZlog4c.a ../HashMapReady/libHashMap.a ../Multicast/libMulticast.a ../../Protocol/libprotocol.a ../MultiServer/GenList/libList.a ../GroupsModule/libGroups.a ../Multicast/Queue/libQueue.a
 
 
 ServerManagerUnitest.o: ServerManagerUnitest.c
@@ -31,6 +31,9 @@ ServerManager.o: ServerManager.c ServerManager.h
 ../Multicast/libMulticast.a:
 	cd ../Multicast && $(MAKE) libMulticast.a
 
+../Multicast/Queue/libQueue.a:
+	cd ../Multicast/Queue && $(MAKE) libQueue.a
+
 ../../Protocol/libprotocol.a:
 	cd ../../Protocol && $(MAKE) libprotocol.a
 
@@ -39,13 +42,14 @@ ServerManager.o: ServerManager.c ServerManager.h
 
 
 clean:
-	rm -f Server.o libServer.a ServerApp ServerUnitest.o *~
+	rm -f ServerManagerApp libServerManager.a ServerManager.o ServerManagerUnitest.o *~
 	cd ../MultiServer && $(MAKE) clean
 	cd ../UsersModule && $(MAKE) clean
 	cd ../GroupsModule && $(MAKE) clean
 	cd ../HashMapReady && $(MAKE) clean
 	cd ../../Protocol && $(MAKE) clean
 	cd ../Multicast && $(MAKE) clean
+	cd ../Multicast/Queue && $(MAKE) clean
 	cd ../MultiServer/GenList/ && $(MAKE) clean
 	cd ../Logs && $(MAKE) clean
 	
